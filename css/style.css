@@ -1,3 +1,11 @@
+/*#overlay{
+height: 700px;
+width:940px;
+position:absolute; /*You may also use fixed depending on your needs.*/
+/*left:0;
+top:0; /*If you want it at the bottom you probably want bottom:0 instead*/
+/*z-index: 999;
+}*/
 
 .timer {
   height: 70px;
@@ -22,24 +30,22 @@ main {
 }
 
 .board {
-  border: 2px solid black;
+  border: 2px solid white;
   margin: 0 auto;
-	height: 300px;
-	width: 500px;
+	height: 450px;
+	width: 700px;
 	display: inline-block;
-  overflow: auto;
-  padding: 0, 0, 0, 0;
+  text-align:center;
 }
 
 .card {
-	height: 200px;
-	width: 150px;
+	height: 400px;
+	width: 300px;
 	border: 1px #000000 solid;
 	border-radius: 10px;
 	background-color: rgb(255,255,0);
-  margin: 20px;
-  vertical-align: top;
-  float: left;
+  display: inline-block;
+  margin: 2%;
 }
 
 div.card {
@@ -50,5 +56,21 @@ cursor:pointer;
 
 
 h1 {
-  font-size: 10px;
+  font-size: 20px;
+}
+
+.image {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  overflow: auto;
+  text-align: center;
+  display: inline-block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+footer {
+  text-align: center;
 }

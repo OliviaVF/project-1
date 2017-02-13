@@ -19,53 +19,55 @@ $(() => {
     }
   }
 
-  const p1 = window.cards.slice(0, 12);
-  const comp = window.cards.slice(12, 24);
+  let p1 = window.cards.slice(0, 12);
+  let comp = window.cards.slice(12, 24);
 
+  let $p1Name;
+  let $p1Image;
+  let $p1Heartache;
+  let $p1Trauma;
+  let $p1sexAppeal;
+  let $compName;
+  let $compImage;
+  let $compHeartache;
+  let $compTrauma;
+  let $compSexAppeal;
 
-  const $p1Name = $p1Card.find('.name').text(p1[0].name);
-  const $p1Heartache = $p1Card.find('.heartache .value').text(p1[0].heartache);
-  const $p1Trauma = $p1Card.find('.trauma .value').text(p1[0].trauma);
-  const $p1sexAppeal = $p1Card.find('.sexAppeal .value').text(p1[0].sexAppeal);
-  const $compName = $compCard.find('.name').text(comp[0].name);
-  const $compHeartache = $compCard.find('.heartache .value').text(comp[0].heartache);
-  const $compTrauma = $compCard.find('.trauma .value').text(comp[0].trauma);
-  const $compSexAppeal = $compCard.find('.sexAppeal .value').text(comp[0].sexAppeal);
 
   function fillCards() {
-    $p1Name;
-    $p1Heartache;
-    $p1Trauma;
-    $p1sexAppeal;
-    $compName;
-    $compHeartache;
-    $compTrauma;
-    $compSexAppeal;
+    $p1Name = $p1Card.find('.name').text(p1[0].name);
+    $p1Image = $p1Card.find('.image').css('backgroundImage', p1[0].img);
+    $p1Heartache = $p1Card.find('.heartache .value').text(p1[0].heartache);
+    $p1Trauma = $p1Card.find('.trauma .value').text(p1[0].trauma);
+    $p1sexAppeal = $p1Card.find('.sexAppeal .value').text(p1[0].sexAppeal);
+    $compName = $compCard.find('.name').text(comp[0].name);
+    $compImage = $compCard.find('.image').css('backgroundImage', comp[0].img);
+    $compHeartache = $compCard.find('.heartache .value').text(comp[0].heartache);
+    $compTrauma = $compCard.find('.trauma .value').text(comp[0].trauma);
+    $compSexAppeal = $compCard.find('.sexAppeal .value').text(comp[0].sexAppeal);
   }
 
-  let p1Score = 10;
-  let compScore = 10;
-  const $yourScore = $('#yourScore');
-  const $compScore = $('#compScore');
+  let yourDeck = 10;
+  let compDeck = 10;
+  const $yourDeck = $('#yourDeck');
+  const $compDeck = $('#compDeck');
 
   function compare() {
     const category = $(this).attr('class');
     if (p1[0][category] > comp[0][category]) {
-      p1Score++;
-      compScore--;
-      $yourScore.html(p1Score);
-      $compScore.html(compScore);
-      p1.push(p1.splice(0,1)[0], comp.splice(0,1),[0]);
-      console.log('winner');
+      yourDeck++;
+      compDeck--;
+      p1.push(p1.splice(0,1)[0], comp.splice(0,1)[0]);
+      console.log(p1, comp);
     } else {
-      p1Score--;
-      $yourScore.html(p1Score);
-      compScore++;
-      $compScore.html(compScore);
-      comp.push(p1.splice(0,1)[0], comp.splice(0,1),[0]);
-      console.log(p1);
-      console.log(comp);
+      yourDeck--;
+      compDeck++;
+      comp.push(p1.splice(0,1)[0], comp.splice(0,1)[0]);
+      console.log(p1, comp);
     }
+    $yourDeck.html(yourDeck);
+    $compDeck.html(compDeck);
+    fillCards();
   }
 
   const $timer = $('.timer');
@@ -86,6 +88,6 @@ $(() => {
   }
 
   startTimer();
-  fillCards();
   $('.card > div').on('click', compare);
+  fillCards();
 });
