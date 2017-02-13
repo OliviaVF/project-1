@@ -1,36 +1,70 @@
-/*#overlay{
-height: 700px;
-width:940px;
-position:absolute; /*You may also use fixed depending on your needs.*/
-/*left:0;
-top:0; /*If you want it at the bottom you probably want bottom:0 instead*/
-/*z-index: 999;
-}*/
+@fontface {
+  font-family: 'gloucester';
+  src: url('../font/goucester-mt-extra-condensed.TTF') format('TTF'),
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background: #103651;
+}
+
+.overlay {
+  background-image: url('../images/eastenders-foreground.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left:0;
+  top:0;
+  z-index: 999;
+  cursor: pointer;
+}
 
 .timer {
   height: 70px;
   width: 70px;
-  border: 5px solid dodgerblue;
+  border: 5px solid #205883;
   position: relative;
   border-radius: 50%;
   font-size: 36px;
   font-weight: bold;
   text-align: center;
   line-height: 70px;
-  color: dodgerblue;
-  margin: 0 auto 30px;
+  color: white;
+  text-shadow: 5px 5px black;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.start {
+  color: white;
+  text-shadow: 5px 5px black;
+  position: relative;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin: 0 auto;
+  cursor: pointer;
+  font-family: 'gloucester';
+  margin-bottom: 0px;
 }
 
 .timer.active {
-  background-color: dodgerblue;
+  background-color: #205883;
   color: white;
 }
+
 main {
   text-align: center;
 }
 
 .board {
-  border: 2px solid white;
+  border: 2px solid transparent;
   margin: 0 auto;
 	height: 450px;
 	width: 700px;
@@ -40,37 +74,54 @@ main {
 
 .card {
 	height: 400px;
-	width: 300px;
-	border: 1px #000000 solid;
+	width: 250px;
+	border: 1px white solid;
 	border-radius: 10px;
-	background-color: rgb(255,255,0);
+	background-color: #205883;
   display: inline-block;
-  margin: 2%;
+  margin: 5%;
 }
 
-div.card {
-}
-div.card:hover {
+
+#p1 {
 cursor:pointer;
 }
 
 
 h1 {
+  font-size: 35px;
+  font-family: Gloucester;
+  font-weight: bold;
+  text-shadow: 5px 5px black;
+  color: white;
+}
+
+.score-board {
   font-size: 20px;
+  font-family: Gloucester;
+  font-weight: bold;
+  text-shadow: 5px 5px black;
+  color: white;
+  text-align: center;
+}
+
+span {
+  font-size: 20px;
+  font-family: Gloucester;
+  font-weight: bold;
+  color: white;
+  text-align: center;
 }
 
 .image {
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
+  height: 172px;
+  width: 250px;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
   overflow: auto;
   text-align: center;
   display: inline-block;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-}
-
-footer {
-  text-align: center;
 }

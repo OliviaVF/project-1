@@ -1,5 +1,9 @@
 $(() => {
 
+  function removeOverlay() {
+    $('.overlay').remove();
+    $('audio').stop();
+  }
 
   const $p1Card = $('#p1');
   const $compCard = $('#comp');
@@ -19,36 +23,24 @@ $(() => {
     }
   }
 
-  let p1 = window.cards.slice(0, 12);
-  let comp = window.cards.slice(12, 24);
-
-  let $p1Name;
-  let $p1Image;
-  let $p1Heartache;
-  let $p1Trauma;
-  let $p1sexAppeal;
-  let $compName;
-  let $compImage;
-  let $compHeartache;
-  let $compTrauma;
-  let $compSexAppeal;
-
+  const p1 = window.cards.slice(0, 12);
+  const comp = window.cards.slice(12, 24);
 
   function fillCards() {
-    $p1Name = $p1Card.find('.name').text(p1[0].name);
-    $p1Image = $p1Card.find('.image').css('backgroundImage', p1[0].img);
-    $p1Heartache = $p1Card.find('.heartache .value').text(p1[0].heartache);
-    $p1Trauma = $p1Card.find('.trauma .value').text(p1[0].trauma);
-    $p1sexAppeal = $p1Card.find('.sexAppeal .value').text(p1[0].sexAppeal);
-    $compName = $compCard.find('.name').text(comp[0].name);
-    $compImage = $compCard.find('.image').css('backgroundImage', comp[0].img);
-    $compHeartache = $compCard.find('.heartache .value').text(comp[0].heartache);
-    $compTrauma = $compCard.find('.trauma .value').text(comp[0].trauma);
-    $compSexAppeal = $compCard.find('.sexAppeal .value').text(comp[0].sexAppeal);
+    $p1Card.find('.name').text(p1[0].name);
+    $p1Card.find('.image').css('backgroundImage', p1[0].img);
+    $p1Card.find('.heartache .value').text(p1[0].heartache);
+    $p1Card.find('.trauma .value').text(p1[0].trauma);
+    $p1Card.find('.sexAppeal .value').text(p1[0].sexAppeal);
+    $compCard.find('.name').text(comp[0].name);
+    $compCard.find('.image').css('backgroundImage', comp[0].img);
+    $compCard.find('.heartache .value').text(comp[0].heartache);
+    $compCard.find('.trauma .value').text(comp[0].trauma);
+    $compCard.find('.sexAppeal .value').text(comp[0].sexAppeal);
   }
 
-  let yourDeck = 10;
-  let compDeck = 10;
+  let yourDeck = 12;
+  let compDeck = 12;
   const $yourDeck = $('#yourDeck');
   const $compDeck = $('#compDeck');
 
@@ -58,6 +50,12 @@ $(() => {
       yourDeck++;
       compDeck--;
       p1.push(p1.splice(0,1)[0], comp.splice(0,1)[0]);
+      console.log(p1, comp);
+    } else if (p1[0][category] === comp[0][category]) {
+      yourDeck;
+      compDeck;
+      p1.push(p1.splice(0,1)[0]);
+      comp.push(comp.splice(0,1)[0]);
       console.log(p1, comp);
     } else {
       yourDeck--;
@@ -87,7 +85,8 @@ $(() => {
     }, 1000);
   }
 
-  startTimer();
-  $('.card > div').on('click', compare);
+  $('.overlay').on('click', removeOverlay);
+  $('.start').on('click', startTimer);
+  $('#p1 > div:not(.image)').on('click', compare);
   fillCards();
 });
