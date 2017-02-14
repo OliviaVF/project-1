@@ -10,17 +10,19 @@
   </head>
   <body>
     <div class="overlay">
-      <audio autoplay>
-        <source src="audio/eastenders_theme.ogg" type="audio/ogg">
-        </audio>
+      <audio autoplay id="theme" src="audio/eastenders_theme.ogg" type="audio/ogg"></audio>
       <img class="playButton" src="images/play-button.jpg">
     </div>
+    <audio id="wicked" src="audio/wicked-witch.mp3" type="audio/mp3"></audio>
+    <audio id="ricky" src="audio/ricky.ogg" type="audio/ogg"></audio>
+    <audio id="pounds" src="audio/four-pounds-fifty.mp3" type="audio/mp3"></audio>
+    <audio id="draw" src="audio/spit-it-out.mp3" type="audio/mp3"></audio>
+    <audio id="lose" src="audio/out-pub.ogg" type="audio/ogg"></audio>
     <header>
-      <div class="timer">60</div>
+      <div class="timer">10</div>
       <div class="start">Start Timer</div>
     </header>
     <main>
-      <!-- <div class="board"> -->
       <div class="container">
         <div class="card" id="p1">
           <div class="front"></div>
@@ -28,15 +30,15 @@
             <h1 class="name"></h1>
             <div class="image" style="background-image:url('images/ian-beale.jpg')"></div>
             <div class="heartache">
-              <span>Heartache</span>
+              <span class="category">Heartache</span>
               <span class="value"></span>
             </div>
             <div class="trauma">
-              <span>Trauma</span>
+              <span class="category">Trauma</span>
               <span class="value"></span>
             </div>
             <div class="sexAppeal">
-              <span>Sex Appeal</span>
+              <span class="category">Sex Appeal</span>
               <span class="value"></span>
             </div>
           </div>
@@ -47,19 +49,31 @@
             <h1 class="name"></h1>
             <div class="image" style="background-image:url('images/ian-beale.jpg')"></div>
             <div class="heartache">
-              <span>Heartache</span>
+              <span class="category">Heartache</span>
               <span class="value"></span>
             </div>
             <div class="trauma">
-              <span>Trauma</span>
+              <span class="category">Trauma</span>
               <span class="value"></span>
             </div>
             <div class="sexAppeal">
-              <span>Sex Appeal</span>
+              <span class="category">Sex Appeal</span>
               <span class="value"></span>
             </div>
           </div>
         </div>
+      </div>
+      <div class="youWon">
+        <p>You Won!</p>
+        <img src="images/you-won.jpg">
+        <audio id="win" src="audio/film-star.mp3" type="audio/mp3"></audio>
+        <button class="reset"> Play Again?</button>
+      </div>
+      <div class="youDrew">
+        <p>You Drew!</p>
+        <img src="images/you-won.jpg">
+        <audio id="win" src="audio/film-star.mp3" type="audio/mp3"></audio>
+        <button class="reset"> Play Again?</button>
       </div>
     </main>
     <footer>

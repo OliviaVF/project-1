@@ -1,24 +1,23 @@
 $(() => {
 
   const $timer = $('.timer');
-  let timeRemaining = 60;
+  let timeRemaining = 10;
   let timerId = null;
   let timer = null;
   let yourDeck = 12;
   let compDeck = 12;
   const $yourDeck = $('#yourDeck');
   const $compDeck = $('#compDeck');
-  const p1 = window.cards.slice(0, 12);
-  const comp = window.cards.slice(12, 24);
   const $p1Card = $('#p1');
   const $compCard = $('#comp');
 
+  shuffle(window.cards);
+  $('.youWon').hide();
+
   function removeOverlay() {
     $('.overlay').remove();
-    $('audio').stop();
+    $('#wicked').get(0).play();
   }
-
-
 
   function startTimer() {
     timer = true;
@@ -29,12 +28,11 @@ $(() => {
       if(timeRemaining === 0) {
         timer = false;
         clearInterval(timerId);
-        timeRemaining = 60;
+        win();
+        timeRemaining = 10;
       }
     }, 1000);
   }
-
-  shuffle(window.cards);
 
   function shuffle(array) {
     var i = 0
@@ -54,6 +52,9 @@ $(() => {
       $p1Card.addClass('flipped');
     }
   }
+
+  const p1 = window.cards.slice(0, 12);
+  const comp = window.cards.slice(12, 24);
 
   fillCards();
 
@@ -80,28 +81,29 @@ $(() => {
     flipComp();
     const category = $(this).attr('class');
     $(this).addClass('selected');
-    console.log($(this).attr('class'));
     if (p1[0][category] > comp[0][category]) {
       yourDeck++;
       compDeck--;
       p1.push(p1.splice(0,1)[0], comp.splice(0,1)[0]);
-      console.log(p1, comp);
+      $('#pounds').get(0).play();
     } else if (p1[0][category] === comp[0][category]) {
       yourDeck;
       compDeck;
       p1.push(p1.splice(0,1)[0]);
       comp.push(comp.splice(0,1)[0]);
-      console.log(p1, comp);
+      $('#draw').get(0).play();
     } else {
       yourDeck--;
       compDeck++;
       comp.push(p1.splice(0,1)[0], comp.splice(0,1)[0]);
       console.log(p1, comp);
+      $('#ricky').get(0).play();
     }
     $yourDeck.html(yourDeck);
     $compDeck.html(compDeck);
-    setTimeout(refill, 3000);
-    setTimeout(flipBack, 2000);
+    setTimeout(refill, 4000);
+    setTimeout(flipBack, 3000);
+    win();
   }
 
   function refill () {
@@ -112,6 +114,41 @@ $(() => {
     $('.card').removeClass('flipped');
     $('.selected').removeClass('selected');
   }
+
+  function win() {
+    console.log('inside the win');
+    if(yourDeck === 24 || compDeck === 24 || timeRemaining === 0) {
+      if (yourDeck > compDeck) {
+        $('#win').get(0).play();
+        $('.youWon').show();
+        $('.container').hide();
+        $('.score-board').hide();
+      } else if (yourDeck === compDeck){
+        $('.youDrew').show();
+        $('.container').hide();
+        $('.score-board').hide();
+      }
+      } else {
+        $('#lose').get(0).play();
+        $('.youLose').show();
+        $('.container').hide();
+        $('.score-board').hide();
+      }
+    }
+    // $('.reset').on('click', playAgain);
+  }
+
+  // function playAgain() {
+  //   timeRemaining = 60;
+  //   startTimer();
+  //   shuffle(window.cards);
+  //   fillCards();
+  //   flipP1();
+  //   compare();
+  //   $('.youWon').hide();
+  //   $('.container').show();
+  //   $('.score-board').show();
+  // }
 
   $('.playButton').on('click', removeOverlay);
   $('.start').on('click', startTimer);
