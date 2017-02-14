@@ -1,13 +1,39 @@
 $(() => {
 
+  const $timer = $('.timer');
+  let timeRemaining = 60;
+  let timerId = null;
+  let timer = null;
+  let yourDeck = 12;
+  let compDeck = 12;
+  const $yourDeck = $('#yourDeck');
+  const $compDeck = $('#compDeck');
+  const p1 = window.cards.slice(0, 12);
+  const comp = window.cards.slice(12, 24);
+  const $p1Card = $('#p1');
+  const $compCard = $('#comp');
+
   function removeOverlay() {
     $('.overlay').remove();
     $('audio').stop();
   }
 
-  const $p1Card = $('#p1');
-  const $compCard = $('#comp');
-  console.log(window.cards);
+
+
+  function startTimer() {
+    timer = true;
+    timerId = setInterval(() => {
+      timeRemaining--;
+      $timer.text(timeRemaining);
+
+      if(timeRemaining === 0) {
+        timer = false;
+        clearInterval(timerId);
+        timeRemaining = 60;
+      }
+    }, 1000);
+  }
+
   shuffle(window.cards);
 
   function shuffle(array) {
@@ -23,8 +49,13 @@ $(() => {
     }
   }
 
-  const p1 = window.cards.slice(0, 12);
-  const comp = window.cards.slice(12, 24);
+  function flipP1() {
+    if (timer) {
+      $p1Card.addClass('flipped');
+    }
+  }
+
+  fillCards();
 
   function fillCards() {
     $p1Card.find('.name').text(p1[0].name);
@@ -39,13 +70,17 @@ $(() => {
     $compCard.find('.sexAppeal .value').text(comp[0].sexAppeal);
   }
 
-  let yourDeck = 12;
-  let compDeck = 12;
-  const $yourDeck = $('#yourDeck');
-  const $compDeck = $('#compDeck');
+  $('#p1').on('click', flipP1);
+
+  function flipComp() {
+    $compCard.addClass('flipped');
+  }
 
   function compare() {
+    flipComp();
     const category = $(this).attr('class');
+    $(this).addClass('selected');
+    console.log($(this).attr('class'));
     if (p1[0][category] > comp[0][category]) {
       yourDeck++;
       compDeck--;
@@ -65,28 +100,21 @@ $(() => {
     }
     $yourDeck.html(yourDeck);
     $compDeck.html(compDeck);
+    setTimeout(refill, 3000);
+    setTimeout(flipBack, 2000);
+  }
+
+  function refill () {
     fillCards();
   }
 
-  const $timer = $('.timer');
-  let timeRemaining = 60;
-  let timerId = null;
-
-
-  function startTimer() {
-    timerId = setInterval(() => {
-      timeRemaining--;
-      $timer.text(timeRemaining);
-
-      if(timeRemaining === 0) {
-        clearInterval(timerId);
-        timeRemaining = 60;
-      }
-    }, 1000);
+  function flipBack () {
+    $('.card').removeClass('flipped');
+    $('.selected').removeClass('selected');
   }
 
-  $('.overlay').on('click', removeOverlay);
+  $('.playButton').on('click', removeOverlay);
   $('.start').on('click', startTimer);
-  $('#p1 > div:not(.image)').on('click', compare);
   fillCards();
+  $('.back > div:not(.image)').on('click', compare);
 });
