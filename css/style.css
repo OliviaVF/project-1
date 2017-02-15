@@ -9,6 +9,12 @@
   font-style: normal;
 }
 
+@keyframes glow {
+    to {
+        text-shadow: 0 0 20px #00FFFF;
+    }
+}
+
 body {
   background: #103651;
 }
@@ -34,10 +40,13 @@ body {
 .playButton {
   z-index: 1000;
   cursor: pointer;
+  margin-top: 25%;
+  margin-left: 41%;
 }
 
 .instructions {
   height: 550px;
+  margin: 64px auto 0;
 }
 
 .instructions .mitchells {
@@ -67,11 +76,11 @@ button {
   font-weight: normal;
 }
 
-main, .timer, .start, h1, .container, .score-board, span, .instructions {
+main, .timer, .start, h1, .container, .score-board, .instructions {
   text-align: center;
 }
 
-.timer, .start, h1, .score-board, span, .youWon, .youLost, .youDrew, .instructions, button {
+.timer, .start, h1, .score-board, .category, .value, .youWon, .youLost, .youDrew, .instructions, button {
   font-family: 'gloucester';
   color: white;
   font-weight: bold;
@@ -104,6 +113,7 @@ main, .timer, .start, h1, .container, .score-board, span, .instructions {
 .start {
   font-size: 25px;
   margin-bottom: 0px;
+  margin-top: 10px;
 }
 
 .timer.active {
@@ -167,8 +177,7 @@ main, .timer, .start, h1, .container, .score-board, span, .instructions {
 }
 
 .selected {
-  border-top: 2px solid white;
-  border-bottom: 2px solid white;
+  animation: glow .5s infinite alternate;
 }
 
 h1 {
@@ -178,13 +187,17 @@ h1 {
 .score-board {
   font-size: 25px;
   text-shadow: 5px 5px black;
-  margin: 0;
+  margin: 0 auto;
+  width: 620px;
+  text-align:left
 }
 
-span {
-  font-size: 25px;
-  margin: 5px;
-  display: inline-block;
+.playerDeck{
+  padding-left: 9%;
+}
+
+.computerDeck{
+  padding-left: 33%;
 }
 
 .image {
@@ -201,13 +214,13 @@ span {
   background-color: black;
   font-size: 25px;
   border: 5px white solid;
-  margin: 64px auto 0;
   width: 615px;
 }
 
-.youWon, .youLost, .youDrew, {
-  margin: 40px auto 0;
+.youWon, .youLost, .youDrew {
+  margin: 130px auto 0;
   height: 445px;
+  padding-top: 35px;
 }
 
 .youDrew .image, .youLost .image {
@@ -217,4 +230,20 @@ span {
 .reset {
   display: block;
   margin: 36px auto;
+}
+
+.category, .value {
+  font-size: 20px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.heartache, .trauma, .sexAppeal {
+  text-align: left;
+  margin-left: 10px;
+}
+
+.value {
+  float: right;
+  margin-right: 10px;
 }

@@ -1,8 +1,10 @@
-let timeRemaining = 10;
+let timeRemaining = 60;
 let timerId = null;
 let timer = null;
 let yourDeck = 12;
 let compDeck = 12;
+let p1 = [];
+let comp = [];
 
 function playGame() {
 
@@ -12,7 +14,6 @@ function playGame() {
   const $p1Card = $('#p1');
   const $compCard = $('#comp');
 
-  shuffle(window.cards);
   $('.youWon').hide();
   $('.youLost').hide();
   $('.youDrew').hide();
@@ -43,9 +44,12 @@ function playGame() {
         clearInterval(timerId);
         win();
         timeRemaining = 60;
+      } if (timeRemaining <= 5){
+        $('.timer').addClass('selected');
       }
     }, 1000);
   }
+
 
   function shuffle(array) {
     var i = 0
@@ -66,9 +70,13 @@ function playGame() {
     }
   }
 
-  const p1 = window.cards.slice(0, 12);
-  const comp = window.cards.slice(12, 24);
+  function shuffleAndDeal() {
+    shuffle(window.cards);
+    p1 = window.cards.slice(0, 12);
+    comp = window.cards.slice(12, 24);
+  }
 
+  shuffleAndDeal();
   fillCards();
 
   function fillCards() {
@@ -99,6 +107,7 @@ function playGame() {
       compDeck--;
       p1.push(p1.splice(0,1)[0], comp.splice(0,1)[0]);
       $('#pounds').get(0).play();
+      $('.playerDeck').addClass('selected');
     } else if (p1[0][category] === comp[0][category]) {
       yourDeck;
       compDeck;
@@ -111,6 +120,7 @@ function playGame() {
       comp.push(p1.splice(0,1)[0], comp.splice(0,1)[0]);
       console.log(p1, comp);
       $('#ricky').get(0).play();
+      $('.computerDeck').addClass('selected');
     }
     $yourDeck.html(yourDeck);
     $compDeck.html(compDeck);
@@ -133,30 +143,39 @@ function playGame() {
     if(yourDeck === 24 || compDeck === 24 || timeRemaining === 0) {
       if (yourDeck > compDeck) {
         $('#win').get(0).play();
-        $('.container').hide();
-        $('.score-board').hide();
-        $('.timer').hide();
         $('.youWon').show();
       } else if (yourDeck === compDeck){
-        $('.container').hide();
-        $('.score-board').hide();
-        $('.timer').hide();
+        $('#drew').get(0).play();
         $('.youDrew').show();
       } else {
         $('#lose').get(0).play();
-        $('.container').hide();
-        $('.score-board').hide();
-        $('.timer').hide();
         $('.youLost').show();
       }
+      $('.container').hide();
+      $('.score-board').hide();
+      $('.start').hide();
+      $timer.hide();
     }
-    // $('.reset').on('click', playAgain);
+    $('.reset').on('click', playAgain);
   }
 
-  // function playAgain() {
-  //   playGame();
-  // }
+  function playAgain() {
+    timeRemaining = 60;
+    $timer.html(60);
+    $yourDeck.html(0);
+    $compDeck.html(0);
+    shuffleAndDeal();
+    fillCards();
+    $('.youWon').hide();
+    $('.youLost').hide();
+    $('.youDrew').hide();
+    $('.container').show();
+    $('.score-board').show();
+    $('.start').show();
+    $timer.show();
+  }
 
+  //make sure cards spin back to show queen vic
 
   $('.playButton').on('click', removeOverlay);
   $('.closeInstructions').on('click', removeInstructions);
