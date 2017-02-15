@@ -13,16 +13,21 @@
       <audio autoplay id="theme" src="audio/eastenders_theme.ogg" type="audio/ogg"></audio>
       <img class="playButton" src="images/play-button.jpg">
     </div>
-    <audio id="wicked" src="audio/wicked-witch.mp3" type="audio/mp3"></audio>
-    <audio id="ricky" src="audio/ricky.ogg" type="audio/ogg"></audio>
-    <audio id="pounds" src="audio/four-pounds-fifty.mp3" type="audio/mp3"></audio>
-    <audio id="draw" src="audio/spit-it-out.mp3" type="audio/mp3"></audio>
-    <audio id="lose" src="audio/out-pub.ogg" type="audio/ogg"></audio>
+    <div class="instructions">
+      <audio id="wicked" src="audio/wicked-witch.mp3" type="audio/mp3"></audio>
+      <button class="closeInstructions">X</button>
+      <p><strong>Instructions:</strong><br>1) Start the timer and flip the first card of your deck.<br>2) Select a category and try and beat the computer<br>by having the higher value.</p>
+      <img class="mitchells" src="images/mitchells.jpg">
+      <p><strong>May the Mitchells be with you.</strong></p>
+    </div>
     <header>
-      <div class="timer">10</div>
+      <div class="timer">60</div>
       <div class="start">Start Timer</div>
     </header>
     <main>
+      <audio id="ricky" src="audio/ricky.ogg" type="audio/ogg"></audio>
+      <audio id="pounds" src="audio/four-pounds-fifty.mp3" type="audio/mp3"></audio>
+      <audio id="draw" src="audio/spit-it-out.mp3" type="audio/mp3"></audio>
       <div class="container">
         <div class="card" id="p1">
           <div class="front"></div>
@@ -63,24 +68,28 @@
           </div>
         </div>
       </div>
-      <div class="youWon">
-        <p>You Won!</p>
-        <img src="images/you-won.jpg">
-        <audio id="win" src="audio/film-star.mp3" type="audio/mp3"></audio>
-        <button class="reset"> Play Again?</button>
-      </div>
-      <div class="youDrew">
-        <p>You Drew!</p>
-        <img src="images/you-won.jpg">
-        <audio id="win" src="audio/film-star.mp3" type="audio/mp3"></audio>
-        <button class="reset"> Play Again?</button>
-      </div>
-    </main>
-    <footer>
       <div class="score-board">
         Your Deck: <span class="score" id="yourDeck">12</span>
         Computer Deck: <span class="score" id="compDeck">12</span>
       </div>
-    </footer>
+        <div class="youWon">
+          <p>You Won!</p>
+          <div class="image" style="background-image:url('images/you-won.jpg')"></div>
+          <audio id="win" src="audio/film-star.mp3" type="audio/mp3"></audio>
+          <button class="reset">Play Again?</button>
+        </div>
+        <div class="youDrew">
+          <p>You Drew!</p>
+          <div class="image" style="background-image:url('images/you-drew.jpg')"></div>
+          <audio id="drew" src="audio/film-star.mp3" type="audio/mp3"></audio>
+          <button class="reset">Play Again?</button>
+        </div>
+        <div class="youLost">
+          <p>You Lost!</p>
+          <div class="image" style="background-image:url('images/you-lose.jpg')"></div>
+          <audio id="lose" src="audio/out-pub.ogg" type="audio/ogg"></audio>
+          <button class="reset">Play Again?</button>
+        </div>
+    </main>
   </body>
 </html>

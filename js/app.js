@@ -1,11 +1,12 @@
-$(() => {
+let timeRemaining = 10;
+let timerId = null;
+let timer = null;
+let yourDeck = 12;
+let compDeck = 12;
+
+function playGame() {
 
   const $timer = $('.timer');
-  let timeRemaining = 10;
-  let timerId = null;
-  let timer = null;
-  let yourDeck = 12;
-  let compDeck = 12;
   const $yourDeck = $('#yourDeck');
   const $compDeck = $('#compDeck');
   const $p1Card = $('#p1');
@@ -13,10 +14,23 @@ $(() => {
 
   shuffle(window.cards);
   $('.youWon').hide();
+  $('.youLost').hide();
+  $('.youDrew').hide();
+  $('header').hide();
+  $('main').hide();
+  $('.score-board').hide();
 
   function removeOverlay() {
     $('.overlay').remove();
     $('#wicked').get(0).play();
+    $('.instructions').show();
+  }
+
+  function removeInstructions() {
+    $('.instructions').hide();
+    $('header').show();
+    $('main').show();
+    $('.score-board').show();
   }
 
   function startTimer() {
@@ -24,12 +38,11 @@ $(() => {
     timerId = setInterval(() => {
       timeRemaining--;
       $timer.text(timeRemaining);
-
       if(timeRemaining === 0) {
         timer = false;
         clearInterval(timerId);
         win();
-        timeRemaining = 10;
+        timeRemaining = 60;
       }
     }, 1000);
   }
@@ -120,38 +133,36 @@ $(() => {
     if(yourDeck === 24 || compDeck === 24 || timeRemaining === 0) {
       if (yourDeck > compDeck) {
         $('#win').get(0).play();
+        $('.container').hide();
+        $('.score-board').hide();
+        $('.timer').hide();
         $('.youWon').show();
-        $('.container').hide();
-        $('.score-board').hide();
       } else if (yourDeck === compDeck){
-        $('.youDrew').show();
         $('.container').hide();
         $('.score-board').hide();
-      }
+        $('.timer').hide();
+        $('.youDrew').show();
       } else {
         $('#lose').get(0).play();
-        $('.youLose').show();
         $('.container').hide();
         $('.score-board').hide();
+        $('.timer').hide();
+        $('.youLost').show();
       }
     }
     // $('.reset').on('click', playAgain);
   }
 
   // function playAgain() {
-  //   timeRemaining = 60;
-  //   startTimer();
-  //   shuffle(window.cards);
-  //   fillCards();
-  //   flipP1();
-  //   compare();
-  //   $('.youWon').hide();
-  //   $('.container').show();
-  //   $('.score-board').show();
+  //   playGame();
   // }
 
+
   $('.playButton').on('click', removeOverlay);
+  $('.closeInstructions').on('click', removeInstructions);
   $('.start').on('click', startTimer);
   fillCards();
   $('.back > div:not(.image)').on('click', compare);
-});
+}
+
+$(playGame);

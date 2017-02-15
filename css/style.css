@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 @fontface {
   font-family: 'gloucester';
   src: url('../font/goucester-mt-extra-condensed.TTF') format('TTF'),
@@ -9,63 +13,102 @@ body {
   background: #103651;
 }
 
-.overlay {
-  background-image: url('../images/eastenders-foreground.jpg');
+.overlay, .front, .image {
   background-size: cover;
   background-position: center;
-  width: 100vw;
-  height: 100vh;
+}
+
+.overlay, .front, .back {
   position: absolute;
   left:0;
   top:0;
+}
+
+.overlay {
+  background-image: url('../images/eastenders-foreground.jpg');
+  width: 100vw;
+  height: 100vh;
   z-index: 999;
 }
 
 .playButton {
   z-index: 1000;
-  text-align: center;
   cursor: pointer;
+}
+
+.instructions {
+  height: 550px;
+}
+
+.instructions .mitchells {
+  border: 2px white solid;
+  height: 32%;
+  width: 53%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+button {
+  font-size: 20px;
+  border: 2px white solid;
+  background-color: transparent;
+}
+
+.instructions button{
+  border-radius: 50%;
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.instructions p {
+  display: inline-block;
+  margin: 30px;
+  font-weight: normal;
+}
+
+main, .timer, .start, h1, .container, .score-board, span, .instructions {
+  text-align: center;
+}
+
+.timer, .start, h1, .score-board, span, .youWon, .youLost, .youDrew, .instructions, button {
+  font-family: 'gloucester';
+  color: white;
+  font-weight: bold;
+}
+
+.timer, .start, #p1, button {
+  cursor: pointer;
+}
+
+.timer, .start, h1 {
+  text-shadow: 5px 5px black;
+}
+
+.timer, .start, {
+  position: relative;
 }
 
 .timer {
   height: 70px;
   width: 70px;
   border: 5px solid #205883;
-  position: relative;
   border-radius: 50%;
   font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 70px;
-  color: white;
-  text-shadow: 5px 5px black;
-  cursor: pointer;
-  margin: 0 auto;
+  line-height: 63px;
   margin-top: 30px;
   margin-bottom: 20px;
+  margin: 0 auto;
 }
 
 .start {
-  color: white;
-  text-shadow: 5px 5px black;
-  position: relative;
   font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  margin: 0 auto;
-  cursor: pointer;
-  font-family: 'gloucester';
   margin-bottom: 0px;
 }
 
 .timer.active {
   background-color: #205883;
   color: white;
-}
-
-main {
-  text-align: center;
 }
 
 .card {
@@ -85,29 +128,24 @@ main {
   height: 450px;
   width: 620px;
   display: inline-block;
-  text-align: center;
   position: relative;
 }
 
 .back {
-	height: 400px;
-	width: 250px;
-	border: 5px white solid;
-	border-radius: 10px;
 	background-color: #205883;
   display: inline-block;
   transform-style: preserve-3d;
   transition: transform 1s;
-  backface-visibility: hidden;
   background-color: #205883;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(-180deg);
 }
 
 .front, .back {
-  position: absolute;
-  top: 0;
-  left: 0;
+  border: 5px white solid;
+  height: 400px;
+	width: 250px;
+	border-radius: 10px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transition: -webkit-transform 0.3s;
@@ -115,13 +153,7 @@ main {
 }
 
 .front {
-  height: 400px;
-	width: 250px;
-	border: 5px white solid;
-  border-radius: 10px;
   background-image: url('../images/queen-vic.jpg');
-  background-size: cover;
-  background-position: center;
 }
 
 .card.flipped .front {
@@ -137,68 +169,52 @@ main {
 .selected {
   border-top: 2px solid white;
   border-bottom: 2px solid white;
-  box-sizing: border-box;
 }
-
-
-
-#p1 {
-cursor:pointer;
-}
-
 
 h1 {
   font-size: 35px;
-  font-family: Gloucester;
-  font-weight: bold;
-  text-shadow: 5px 5px black;
-  color: white;
 }
 
 .score-board {
   font-size: 25px;
-  font-family: Gloucester;
-  font-weight: bold;
   text-shadow: 5px 5px black;
-  color: white;
-  text-align: center;
   margin: 0;
 }
 
 span {
   font-size: 25px;
-  font-family: Gloucester;
-  font-weight: bold;
-  color: white;
-  text-align: center;
   margin: 5px;
   display: inline-block;
-  text-align: justify;
 }
 
 .image {
   height: 172px;
-  width: 250px;
+  width: 240px;
   border-top: 2px solid white;
   border-bottom: 2px solid white;
   overflow: auto;
-  text-align: center;
   display: inline-block;
-  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
 }
 
-.youWon {
-  border: 2px solid transparent;
+.youWon, .youLost, .youDrew, .instructions {
+  background-color: black;
+  font-size: 25px;
+  border: 5px white solid;
+  margin: 64px auto 0;
+  width: 615px;
+}
+
+.youWon, .youLost, .youDrew, {
   margin: 40px auto 0;
   height: 445px;
-  width: 615px;
-  background-color: rgb(0,0,0);
-  font-size: 25px;
-  font-family: Gloucester;
-  font-weight: bold;
-  color: white;
-  z-index: 999;
-  border: 5px white solid;
+}
+
+.youDrew .image, .youLost .image {
+  border: 2px solid white;
+}
+
+.reset {
+  display: block;
+  margin: 36px auto;
 }
