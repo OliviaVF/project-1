@@ -1,4 +1,6 @@
-window.cards = [{
+var ett = ett || {};
+
+ett.cards = [{
   name: 'Ian Beale',
   img: 'url("images/ian-beale.jpg")',
   heartache: 99,

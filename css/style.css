@@ -40,13 +40,15 @@ body {
 .playButton {
   z-index: 1000;
   cursor: pointer;
-  margin-top: 25%;
-  margin-left: 41%;
+  top: 71%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }
 
 .instructions {
   height: 550px;
-  margin: 64px auto 0;
+  margin: 10% auto 0;
 }
 
 .instructions .mitchells {
@@ -105,20 +107,11 @@ main, .timer, .start, h1, .container, .score-board, .instructions {
   border-radius: 50%;
   font-size: 36px;
   line-height: 63px;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  margin: 0 auto;
+  margin: 5% auto 2%;
 }
 
 .start {
   font-size: 25px;
-  margin-bottom: 0px;
-  margin-top: 10px;
-}
-
-.timer.active {
-  background-color: #205883;
-  color: white;
 }
 
 .card {
@@ -134,7 +127,7 @@ main, .timer, .start, h1, .container, .score-board, .instructions {
 
 .container {
   border: 2px solid transparent;
-  margin: 20px auto 0;
+  margin: 6% auto 0;
   height: 450px;
   width: 620px;
   display: inline-block;
@@ -197,7 +190,7 @@ h1 {
 }
 
 .computerDeck{
-  padding-left: 33%;
+  padding-left: 32%;
 }
 
 .image {
@@ -218,7 +211,7 @@ h1 {
 }
 
 .youWon, .youLost, .youDrew {
-  margin: 130px auto 0;
+  margin: 16% auto 0;
   height: 445px;
   padding-top: 35px;
 }
