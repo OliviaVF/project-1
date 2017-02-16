@@ -48,7 +48,10 @@ body {
 
 .instructions {
   height: 550px;
-  margin: 10% auto 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .instructions .mitchells {
@@ -96,8 +99,11 @@ main, .timer, .start, h1, .container, .score-board, .instructions {
   text-shadow: 5px 5px black;
 }
 
-.timer, .start, {
-  position: relative;
+header {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .timer {
@@ -107,7 +113,7 @@ main, .timer, .start, h1, .container, .score-board, .instructions {
   border-radius: 50%;
   font-size: 36px;
   line-height: 63px;
-  margin: 5% auto 2%;
+  margin: 0 auto
 }
 
 .start {
@@ -131,7 +137,10 @@ main, .timer, .start, h1, .container, .score-board, .instructions {
   height: 450px;
   width: 620px;
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .back {
@@ -178,19 +187,23 @@ h1 {
 }
 
 .score-board {
-  font-size: 25px;
+  font-size: 35px;
   text-shadow: 5px 5px black;
   margin: 0 auto;
   width: 620px;
-  text-align:left
+  text-align:left;
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .playerDeck{
-  padding-left: 9%;
+  padding-left: 4%;
 }
 
 .computerDeck{
-  padding-left: 32%;
+  padding-left: 22%;
 }
 
 .image {
@@ -211,9 +224,12 @@ h1 {
 }
 
 .youWon, .youLost, .youDrew {
-  margin: 16% auto 0;
   height: 445px;
   padding-top: 35px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .youDrew .image, .youLost .image {
@@ -239,4 +255,52 @@ h1 {
 .value {
   float: right;
   margin-right: 10px;
+}
+
+.container.playerWin #fakeCard {
+  left: calc(100% - 250px);
+  display: block;
+}
+
+.container.playerWin.transitioning #fakeCard {
+  left: 0;
+}
+
+.container.compWin #fakeCard {
+  left: 0;
+  display: block;
+}
+
+.container.compWin.transitioning #fakeCard {
+  left: calc(100% - 250px);
+}
+
+#fakeCard {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+@media only screen
+and (max-device-width : 768px) {
+  .overlay {
+    height: 55vh;
+    top: 22%;
+  }
+}
+
+@media only screen
+and (max-device-width : 425px) {
+
+  .instructions {
+    width: 800px;
+    height: 700px;
+    font-size: 35px;
+  }
+  .youWin, .youLose, .youDrew {
+    width: 800px;
+    height: 700px;
+    font-size: 35px;
+  }
 }

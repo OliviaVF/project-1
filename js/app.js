@@ -1,28 +1,20 @@
 var ett = ett || {};
 
-ett.timeRemaining = 10;
-ett.timerId = null;
-ett.timer = null;
-ett.yourDeck = 12;
-ett.compDeck = 12;
-ett.p1 = [];
-ett.comp = [];
-
 ett.removeOverlay = function() {
   $('.overlay').remove();
   $('#wicked').get(0).play();
-  $('.instructions').show();
+  this.$instructions.show();
 };
 
 ett.removeInstructions = function() {
-  $('.instructions').hide();
+  this.$instructions.hide();
   $('header').show();
   $('main').show();
   $('.score-board').show();
 };
 
 ett.startTimer = function() {
-  $('.start').hide();
+  $('.start').css('visibility', 'hidden');
   this.timer = true;
   this.timerId = setInterval(() => {
     this.timeRemaining--;
@@ -31,7 +23,7 @@ ett.startTimer = function() {
       this.timer = false;
       clearInterval(this.timerId);
       this.win();
-      this.timeRemaining = 10;
+      this.timeRemaining = 60;
     } if (this.timeRemaining <= 5){
       this.$timer.addClass('selected');
     }
@@ -39,26 +31,25 @@ ett.startTimer = function() {
 };
 
 ett.shuffle = function(array) {
-  var i = 0
-  , j = 0
-  , temp = null;
-
-  for (i = array.length - 1; i > 0; i -= 1) {
-    this.j = Math.floor(Math.random() * (i + 1));
-    temp = this.cards[i];
-    array[i] = array[j];
-    array[j] = temp;
+  var m = array.length, t, i;
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
   }
+  return array;
 };
 
 ett.flipP1 = function() {
   if (this.timer) {
     this.$p1Card.addClass('flipped');
+    $('.container').removeClass('compWin playerWin transitioning');
   }
 };
 
 ett.shuffleAndDeal = function() {
-  this.shuffle(this.cards);
+  this.cards = this.shuffle(this.cards);
   this.p1 = this.cards.slice(0, 12);
   this.comp = this.cards.slice(12, 24);
 };
@@ -94,6 +85,12 @@ ett.compare = function(e) {
       this.p1.push(this.p1.splice(0,1)[0], this.comp.splice(0,1)[0]);
       $('#pounds').get(0).play();
       $('.playerDeck').addClass('selected');
+      setTimeout(() => {
+        $('.container').addClass('playerWin');
+      }, 3200);
+      setTimeout(() => {
+        $('.container').addClass('playerWin transitioning');
+      }, 3500);
     } else if (this.p1[0][category] === this.comp[0][category]) {
       this.yourDeck;
       this.compDeck;
@@ -107,6 +104,12 @@ ett.compare = function(e) {
       console.log(this.p1, this.comp);
       $('#ricky').get(0).play();
       $('.computerDeck').addClass('selected');
+      setTimeout(() => {
+        $('.container').addClass('compWin');
+      }, 3200);
+      setTimeout(() => {
+        $('.container').addClass('compWin transitioning');
+      }, 3500);
     }
     this.$yourDeck.html(this.yourDeck);
     this.$compDeck.html(this.compDeck);
@@ -149,6 +152,8 @@ ett.playAgain = function() {
   this.$timer.html(60);
   this.$yourDeck.html(12);
   this.$compDeck.html(12);
+  this.yourDeck = 12;
+  this.compDeck = 12;
   this.shuffleAndDeal();
   this.fillCards();
   this.flipBack();
@@ -160,20 +165,30 @@ ett.playAgain = function() {
   $('.start').show();
   this.$timer.show();
   this.$timer.removeClass('selected');
+  $('.start').css('visibility', 'visible');
 };
 
 ett.setup = function() {
+  this.timeRemaining = 60;
+  this.timerId = null;
+  this.timer = null;
+  this.yourDeck = 12;
+  this.compDeck = 12;
+  this.p1 = [];
+  this.comp = [];
   this.$timer = $('.timer');
   this.$yourDeck = $('#yourDeck');
   this.$compDeck = $('#compDeck');
   this.$p1Card = $('#p1');
   this.$compCard = $('#comp');
+  this.$instructions = $('.instructions');
   $('.youWon').hide();
   $('.youLost').hide();
   $('.youDrew').hide();
   $('header').hide();
   $('main').hide();
   $('.score-board').hide();
+  this.$instructions.hide();
   this.shuffleAndDeal();
   this.fillCards();
   $('#p1').on('click', this.flipP1.bind(this));
