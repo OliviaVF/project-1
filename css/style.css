@@ -203,7 +203,7 @@ h1 {
 }
 
 .computerDeck{
-  padding-left: 22%;
+  padding-left: 21%;
 }
 
 .image {
@@ -221,6 +221,7 @@ h1 {
   font-size: 25px;
   border: 5px white solid;
   width: 615px;
+  border-radius: 5%;
 }
 
 .youWon, .youLost, .youDrew {
